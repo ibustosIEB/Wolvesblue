@@ -1,0 +1,653 @@
+```html
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Wolves - Club de Fútbol Americano</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para una iconografía moderna -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wolves: {
+                            dark: '#0B132B',
+                            navy: '#1C2541',
+                            blue: '#3A506B',
+                            cyan: '#5BC0BE',
+                            accent: '#6FFFE9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(11, 19, 43, 0.95) 0%, rgba(28, 25, 65, 0.8) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans leading-relaxed">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-wolves-dark/90 backdrop-blur-md border-b border-wolves-blue/30 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- LOGO: Lobo con traje azul -->
+            <a href="#inicio" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 bg-wolves-navy rounded-full p-1 border border-wolves-cyan flex items-center justify-center shadow-[0_0_15px_rgba(91,192,190,0.3)] group-hover:scale-105 transition-transform">
+                    <!-- SVG personalizado: Lobo con Jersey/Traje Azul de Fútbol Americano -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Traje Azul (Jersey de Fútbol con hombreras) -->
+                        <path d="M20,80 L30,55 L40,58 L50,50 L60,58 L70,55 L80,80 L50,90 Z" fill="#1E3A8A" stroke="#3B82F6" stroke-width="2"/>
+                        <!-- Cuello y detalles del Jersey amarillo/oro de equipo -->
+                        <path d="M40,58 L50,65 L60,58 L50,50 Z" fill="#F59E0B"/>
+                        <text x="50" y="80" font-family="Impact, sans-serif" font-size="16" fill="#FFFFFF" text-anchor="middle">00</text>
+                        
+                        <!-- Cabeza del Lobo -->
+                        <!-- Oreja Izquierda -->
+                        <polygon points="30,25 45,15 42,35" fill="#4B5563" stroke="#1F2937" stroke-width="1"/>
+                        <polygon points="33,26 42,18 40,32" fill="#9CA3AF"/>
+                        <!-- Oreja Derecha -->
+                        <polygon points="70,25 55,15 58,35" fill="#4B5563" stroke="#1F2937" stroke-width="1"/>
+                        <polygon points="67,26 58,18 60,32" fill="#9CA3AF"/>
+                        
+                        <!-- Cara / Mandíbula -->
+                        <polygon points="35,35 65,35 50,70" fill="#374151"/>
+                        <polygon points="38,37 62,37 50,65" fill="#6B7280"/>
+                        
+                        <!-- Hocico -->
+                        <polygon points="45,55 55,55 50,68" fill="#111827"/>
+                        
+                        <!-- Ojos Brillantes (Azul/Cyan) -->
+                        <polygon points="42,42 48,44 45,46" fill="#6FFFE9" class="animate-pulse"/>
+                        <polygon points="58,42 52,44 55,46" fill="#6FFFE9" class="animate-pulse"/>
+                        
+                        <!-- Pelaje mejillas -->
+                        <polygon points="35,35 30,45 38,45" fill="#4B5563"/>
+                        <polygon points="65,35 70,45 62,45" fill="#4B5563"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-wider text-white group-hover:text-wolves-accent transition-colors">BLUE WOLVES</span>
+                    <span class="text-[10px] uppercase tracking-widest text-wolves-cyan font-bold">Fútbol Americano</span>
+                </div>
+            </a>
+
+            <!-- Navegación Escritorio -->
+            <nav class="hidden md:flex items-center gap-8 font-medium">
+                <a href="#inicio" class="text-gray-300 hover:text-wolves-accent transition-colors">Inicio</a>
+                <a href="#nosotros" class="text-gray-300 hover:text-wolves-accent transition-colors">Quiénes Somos</a>
+                <a href="#club" class="text-gray-300 hover:text-wolves-accent transition-colors">El Club</a>
+                <a href="#ubicacion" class="text-gray-300 hover:text-wolves-accent transition-colors">Ubicación</a>
+                <a href="#contacto" class="px-4 py-2 rounded-lg bg-wolves-cyan text-wolves-dark font-bold hover:bg-wolves-accent transition-all transform hover:-translate-y-0.5 shadow-lg shadow-wolves-cyan/20">Contacto</a>
+            </nav>
+
+            <!-- Botón Menú Móvil -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-wolves-accent focus:outline-none" aria-label="Abrir menú">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-wolves-dark border-t border-wolves-blue/30 px-4 py-6 space-y-4 shadow-2xl">
+            <a href="#inicio" class="mobile-link block text-lg font-semibold text-gray-300 hover:text-wolves-accent py-2">Inicio</a>
+            <a href="#nosotros" class="mobile-link block text-lg font-semibold text-gray-300 hover:text-wolves-accent py-2">Quiénes Somos</a>
+            <a href="#club" class="mobile-link block text-lg font-semibold text-gray-300 hover:text-wolves-accent py-2">El Club</a>
+            <a href="#ubicacion" class="mobile-link block text-lg font-semibold text-gray-300 hover:text-wolves-accent py-2">Ubicación</a>
+            <a href="#contacto" class="mobile-link block text-center py-3 rounded-lg bg-wolves-cyan text-wolves-dark font-bold hover:bg-wolves-accent transition-all">Contacto</a>
+        </div>
+    </header>
+
+    <!-- SECCIÓN: INICIO (HERO) -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Fondo Decorativo con Lobo de Fondo -->
+        <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?q=80&w=1920&auto=format&fit=crop');">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center md:text-left flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wolves-cyan/10 border border-wolves-cyan/30 text-wolves-accent text-sm font-semibold tracking-wider uppercase">
+                    <i data-lucide="award" class="w-4 h-4"></i> Temporada 2026/2027
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none text-white">
+                    UNIÓN. FUERZA. <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-wolves-cyan to-blue-400">DISCIPLINA.</span>
+                </h1>
+                <p class="text-lg text-gray-300 max-w-xl">
+                    Formamos más que atletas; construimos líderes dentro y fuera del emparrillado. Únete a la manada de los Blue Wolves y descubre el verdadero poder del trabajo en equipo.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                    <a href="#club" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-wolves-cyan text-wolves-dark font-extrabold text-center hover:bg-wolves-accent transition-all shadow-lg shadow-wolves-cyan/30 flex items-center justify-center gap-2">
+                        Conoce el Club <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#contacto" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/20 text-white font-extrabold text-center hover:bg-white/10 hover:border-white transition-all flex items-center justify-center gap-2">
+                        Prueba Gratis
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gran Logo Wolf en Traje Azul para Impacto Visual -->
+            <div class="flex-1 flex justify-center items-center">
+                <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-3xl bg-wolves-navy/80 border border-wolves-blue/50 p-8 flex items-center justify-center shadow-[0_0_50px_rgba(91,192,190,0.15)] overflow-hidden group">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-wolves-cyan/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl"></div>
+                    
+                    <svg viewBox="0 0 100 100" class="w-full h-full relative z-10 transition-transform duration-500 group-hover:scale-105" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sombras del fondo -->
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#3A506B" stroke-dasharray="2 4" stroke-width="0.5"/>
+                        
+                        <!-- Traje Azul del Lobo (Jersey de Fútbol con hombreras estructuradas) -->
+                        <path d="M15,85 L28,52 L40,55 L50,47 L60,55 L72,52 L85,85 L50,95 Z" fill="#1E40AF" stroke="#60A5FA" stroke-width="1.5"/>
+                        <path d="M28,52 L34,86 M72,52 L66,86" stroke="#3B82F6" stroke-width="1"/>
+                        <path d="M38,55 L50,63 L62,55 L50,47 Z" fill="#F59E0B"/>
+                        <!-- Número de Jersey -->
+                        <text x="50" y="82" font-family="Impact, Charcoal, sans-serif" font-size="20" fill="#FFFFFF" text-anchor="middle">00</text>
+                        
+                        <!-- Cabeza del Lobo Feroz -->
+                        <!-- Orejas -->
+                        <polygon points="25,20 42,8 38,32" fill="#374151" stroke="#111827" stroke-width="1"/>
+                        <polygon points="29,21 38,12 36,29" fill="#9CA3AF"/>
+                        <polygon points="75,20 58,8 62,32" fill="#374151" stroke="#111827" stroke-width="1"/>
+                        <polygon points="71,21 62,12 64,29" fill="#9CA3AF"/>
+                        
+                        <!-- Cara y Barbilla -->
+                        <polygon points="30,32 70,32 50,70" fill="#1F2937"/>
+                        <polygon points="34,35 66,35 50,64" fill="#4B5563"/>
+                        
+                        <!-- Pelaje lateral -->
+                        <polygon points="30,32 22,42 32,44" fill="#374151"/>
+                        <polygon points="70,32 78,42 68,44" fill="#374151"/>
+                        
+                        <!-- Hocico/Boca -->
+                        <polygon points="42,50 58,50 50,68" fill="#111827"/>
+                        <!-- Nariz -->
+                        <polygon points="46,50 54,50 50,56" fill="#000000"/>
+                        <!-- Colmillos asomando levemente -->
+                        <polygon points="44,56 46,56 45,60" fill="#FFFFFF"/>
+                        <polygon points="56,56 54,56 55,60" fill="#FFFFFF"/>
+
+                        <!-- Ojos Brillantes Amenazantes de Lobo -->
+                        <polygon points="38,39 46,41 42,44" fill="#6FFFE9"/>
+                        <polygon points="62,39 54,41 58,44" fill="#6FFFE9"/>
+                        
+                        <!-- Pintura de Guerra bajo los ojos -->
+                        <path d="M34,45 L42,46 M66,45 L58,46" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: QUIÉNES SOMOS -->
+    <section id="nosotros" class="py-24 bg-wolves-navy/30 border-t border-b border-wolves-blue/20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold tracking-widest text-wolves-accent uppercase mb-2">Conoce Nuestra Identidad</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">¿Quiénes son los Blue Wolves?</p>
+                <div class="w-16 h-1 bg-wolves-cyan mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Imagen/Concepto Representativo de la Manada -->
+                <div class="relative rounded-2xl overflow-hidden aspect-video md:aspect-square shadow-2xl border border-wolves-blue/40">
+                    <img src="https://images.unsplash.com/photo-1569517282132-25d22f4573e6?q=80&w=800&auto=format&fit=crop" alt="[Entrenamiento del club de fútbol americano]" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-wolves-dark via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <p class="text-wolves-accent font-bold text-sm tracking-widest uppercase">Valores de la Manada</p>
+                        <p class="text-white text-xl font-bold mt-1">"La fuerza del lobo reside en la manada, y la fuerza de la manada reside en el lobo."</p>
+                    </div>
+                </div>
+
+                <!-- Detalles de Quiénes Somos -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Nuestra Historia</h3>
+                        <p class="text-gray-300">
+                            Fundado en el año 2018, el Club de Fútbol Americano **Blue Wolves** nació con el propósito de expandir la pasión por el deporte del emparrillado. Empezamos con un puñado de apasionados en un parque local y hoy nos hemos convertido en una de las instituciones deportivas más respetadas del país, con múltiples categorías de competencia y una academia de alto rendimiento.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="p-5 rounded-xl bg-wolves-dark/50 border border-wolves-blue/20 hover:border-wolves-cyan/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-wolves-cyan/10 flex items-center justify-center text-wolves-accent mb-4">
+                                <i data-lucide="target" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-white font-bold mb-2">Misión</h4>
+                            <p class="text-gray-400 text-sm">
+                                Fomentar el desarrollo atlético y personal de nuestros jugadores mediante la disciplina, el respeto y la competitividad deportiva.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-wolves-dark/50 border border-wolves-blue/20 hover:border-wolves-cyan/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-wolves-cyan/10 flex items-center justify-center text-wolves-accent mb-4">
+                                <i data-lucide="eye" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-white font-bold mb-2">Visión</h4>
+                            <p class="text-gray-400 text-sm">
+                                Consolidarnos como la cantera de fútbol americano número uno, liderando los torneos nacionales y formando atletas de nivel universitario internacional.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas Rápidas -->
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-wolves-blue/20">
+                        <div class="text-center">
+                            <p class="text-3xl font-black text-wolves-accent">250+</p>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold">Atletas Activos</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-black text-wolves-accent">5</p>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold">Categorías</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-black text-wolves-accent">12</p>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold">Entrenadores Certificados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: CÓMO ES EL CLUB -->
+    <section id="club" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold tracking-widest text-wolves-accent uppercase mb-2">Experiencia Blue Wolves</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">¿Cómo es Nuestro Club?</p>
+                <p class="text-gray-400 mt-4">Nuestra organización ofrece una estructura integral de primer nivel diseñada para potenciar tu talento físico y mental.</p>
+                <div class="w-16 h-1 bg-wolves-cyan mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Servicios / Qué Ofrecemos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tarjeta 1: Entrenamientos de Alto Rendimiento -->
+                <div class="p-8 rounded-2xl bg-wolves-navy/40 border border-wolves-blue/30 flex flex-col justify-between hover:scale-[1.02] transition-all group hover:border-wolves-cyan/50">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500/20 transition-colors">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Entrenamiento Físico</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Sesiones enfocadas en velocidad, potencia, agilidad y resistencia táctica. Contamos con preparadores físicos certificados especializados en el fútbol americano moderno.
+                        </p>
+                    </div>
+                    <ul class="space-y-2 mt-6 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Gimnasio de pesas propio</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Prácticas en campo sintético profesional</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Prevención y readaptación de lesiones</li>
+                    </ul>
+                </div>
+
+                <!-- Tarjeta 2: Táctica e Inteligencia de Juego -->
+                <div class="p-8 rounded-2xl bg-wolves-navy/40 border border-wolves-blue/30 flex flex-col justify-between hover:scale-[1.02] transition-all group hover:border-wolves-cyan/50">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:bg-amber-500/20 transition-colors">
+                            <i data-lucide="brain" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Sesiones de Video y Pizarra</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            El fútbol americano se gana con la mente. Analizamos estrategias, jugadas de pizarrón y estudiamos minuciosamente el juego de nuestros rivales en salas equipadas.
+                        </p>
+                    </div>
+                    <ul class="space-y-2 mt-6 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Plan de juego personalizado</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Análisis de errores individuales por video</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Mentoría de mariscales de campo (QB)</li>
+                    </ul>
+                </div>
+
+                <!-- Tarjeta 3: Equipamiento y Uniformes -->
+                <div class="p-8 rounded-2xl bg-wolves-navy/40 border border-wolves-blue/30 flex flex-col justify-between hover:scale-[1.02] transition-all group hover:border-wolves-cyan/50">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-wolves-cyan/10 flex items-center justify-center text-wolves-accent group-hover:bg-wolves-cyan/20 transition-colors">
+                            <i data-lucide="shield" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">La Armadura Blue Wolf</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            La seguridad es prioridad. Proveemos de manera integral cascos y hombreras de última generación que garantizan la máxima protección a nuestros jugadores.
+                        </p>
+                    </div>
+                    <ul class="space-y-2 mt-6 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Cascos con certificación de seguridad</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Uniformes oficiales de visitante y local</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-wolves-accent"></i> Servicio técnico de utilería</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Nuestras Categorías -->
+            <div class="mt-20">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-white">Nuestras Categorías</h3>
+                    <p class="text-gray-400 mt-2 text-sm">Contamos con programas adaptados para todas las edades y niveles de experiencia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Cat 1 -->
+                    <div class="bg-wolves-dark border border-wolves-blue/30 rounded-xl p-6 text-center hover:bg-wolves-navy/40 transition-colors">
+                        <span class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-300 text-xs font-bold uppercase">Infantil</span>
+                        <h4 class="text-lg font-bold text-white mt-3">Under 13</h4>
+                        <p class="text-xs text-gray-400 mt-1">De 9 a 13 años</p>
+                        <p class="text-sm text-gray-300 mt-4">Modalidad "Flag Football" y equipados básicos. Desarrollo motriz y diversión.</p>
+                    </div>
+                    <!-- Cat 2 -->
+                    <div class="bg-wolves-dark border border-wolves-blue/30 rounded-xl p-6 text-center hover:bg-wolves-navy/40 transition-colors">
+                        <span class="px-2.5 py-1 rounded bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase">Cadete</span>
+                        <h4 class="text-lg font-bold text-white mt-3">Under 17</h4>
+                        <p class="text-xs text-gray-400 mt-1">De 14 a 17 años</p>
+                        <p class="text-sm text-gray-300 mt-4">Introducción formal al juego de contacto táctico de nivel competitivo.</p>
+                    </div>
+                    <!-- Cat 3 -->
+                    <div class="bg-wolves-dark border border-wolves-blue/30 rounded-xl p-6 text-center hover:bg-wolves-navy/40 transition-colors">
+                        <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs font-bold uppercase">Femenil</span>
+                        <h4 class="text-lg font-bold text-white mt-3">Wolves Women</h4>
+                        <p class="text-xs text-gray-400 mt-1">A partir de 15 años</p>
+                        <p class="text-sm text-gray-300 mt-4">Nuestra manada femenina destaca en torneos nacionales de Flag e Tackle.</p>
+                    </div>
+                    <!-- Cat 4 -->
+                    <div class="bg-wolves-dark border border-wolves-blue/30 rounded-xl p-6 text-center hover:bg-wolves-navy/40 transition-colors">
+                        <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase">Elite</span>
+                        <h4 class="text-lg font-bold text-white mt-3">Senior Masculino</h4>
+                        <p class="text-xs text-gray-400 mt-1">Mayores de 18 años</p>
+                        <p class="text-sm text-gray-300 mt-4">Nuestra división insignia. Compite en los niveles nacionales de mayor rigor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: UBICACIÓN -->
+    <section id="ubicacion" class="py-24 bg-wolves-navy/20 border-t border-wolves-blue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Información de dirección -->
+                <div class="lg:col-span-5 space-y-6">
+                    <h2 class="text-sm font-bold tracking-widest text-wolves-accent uppercase">¿Dónde Entrenamos?</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Nuestra Guarida</p>
+                    <p class="text-gray-300">
+                        Los entrenamientos y juegos locales se realizan en el **Estadio Deportivo Municipal Wolves**, una instalación moderna con gradas para aficionados, vestuarios de primer nivel, zona médica y excelente iluminación para prácticas nocturnas.
+                    </p>
+                    
+                    <div class="space-y-4 pt-4 border-t border-wolves-blue/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-wolves-cyan/10 flex items-center justify-center text-wolves-accent shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-bold">Dirección Oficial</p>
+                                <p class="text-gray-400 text-sm">Avenida de los Deportistas 450, Distrito Deportivo, CP 28001</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-wolves-cyan/10 flex items-center justify-center text-wolves-accent shrink-0">
+                                <i data-lucide="calendar" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-bold">Horarios de Práctica</p>
+                                <p class="text-gray-400 text-sm">Martes, Jueves y Sábados: 18:00 hrs a 21:00 hrs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulación de Mapa Interactivo / Estilizado con Tailwind -->
+                <div class="lg:col-span-7">
+                    <div class="relative w-full h-96 rounded-2xl overflow-hidden border border-wolves-blue/40 shadow-2xl">
+                        <!-- Mapa interactivo de ejemplo (Simulado estéticamente para que combine con el diseño oscuro de la web) -->
+                        <div class="absolute inset-0 bg-slate-900 flex items-center justify-center">
+                            <!-- Patrón de cuadrícula de mapa estilizado -->
+                            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#3a506b 1px, transparent 1px); background-size: 20px 20px;"></div>
+                            
+                            <!-- Dibujo de calles vectoriales abstractas -->
+                            <svg class="absolute inset-0 w-full h-full stroke-wolves-blue/40 fill-none" stroke-width="2">
+                                <line x1="0" y1="100" x2="1000" y2="100" />
+                                <line x1="0" y1="250" x2="1000" y2="250" stroke-width="4" stroke="#1c2541"/>
+                                <line x1="400" y1="0" x2="400" y2="500" stroke-width="4" stroke="#1c2541" />
+                                <line x1="150" y1="0" x2="150" y2="500" />
+                                <circle cx="400" cy="250" r="80" class="stroke-dashed opacity-50" />
+                            </svg>
+
+                            <!-- Zona del Estadio -->
+                            <div class="absolute top-[210px] left-[360px] bg-emerald-950/80 border-2 border-emerald-500 rounded-lg p-3 flex flex-col items-center gap-1 shadow-2xl z-10">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-emerald-400 animate-bounce"></i>
+                                <p class="text-[10px] uppercase tracking-widest font-bold text-white">Estadio Wolves</p>
+                            </div>
+
+                            <!-- Puntos de Referencia -->
+                            <div class="absolute top-12 left-10 text-xs text-gray-500 font-semibold bg-wolves-dark/50 px-2 py-1 rounded">Estación Central Trenes</div>
+                            <div class="absolute bottom-16 right-16 text-xs text-gray-500 font-semibold bg-wolves-dark/50 px-2 py-1 rounded">Centro Comercial Del Norte</div>
+
+                            <!-- Leyenda de navegación del mapa simulada -->
+                            <div class="absolute bottom-4 left-4 bg-wolves-dark/90 px-3 py-2 rounded-lg border border-wolves-blue/50 text-xs flex items-center gap-3">
+                                <span class="w-3 h-3 bg-emerald-500 rounded-full inline-block"></span>
+                                <span class="text-white font-medium">Ubicación Actual del Campo</span>
+                            </div>
+
+                            <!-- Botones de Control de Mapa Simulados -->
+                            <div class="absolute top-4 right-4 flex flex-col gap-2">
+                                <button class="w-8 h-8 bg-wolves-dark/90 rounded border border-wolves-blue/50 text-white flex items-center justify-center hover:bg-wolves-blue/50" aria-label="Acercar mapa"><i data-lucide="plus" class="w-4 h-4"></i></button>
+                                <button class="w-8 h-8 bg-wolves-dark/90 rounded border border-wolves-blue/50 text-white flex items-center justify-center hover:bg-wolves-blue/50" aria-label="Alejar mapa"><i data-lucide="minus" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: CONTACTO -->
+    <section id="contacto" class="py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold tracking-widest text-wolves-accent uppercase mb-2">Da el Primer Paso</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Únete a la Manada</p>
+                <p class="text-gray-400 mt-4">¿Tienes preguntas o quieres agendar tu primer entrenamiento gratis? Escríbenos.</p>
+                <div class="w-16 h-1 bg-wolves-cyan mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="bg-wolves-navy/40 border border-wolves-blue/30 rounded-3xl p-8 sm:p-12 shadow-2xl backdrop-blur-md">
+                <!-- Formulario de Contacto -->
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="nombre" class="block text-sm font-semibold text-gray-300 mb-2">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Martínez" required
+                                class="w-full bg-wolves-dark border border-wolves-blue/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-wolves-cyan transition-colors placeholder-gray-600">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-300 mb-2">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="Ej. carlos@mail.com" required
+                                class="w-full bg-wolves-dark border border-wolves-blue/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-wolves-cyan transition-colors placeholder-gray-600">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="telefono" class="block text-sm font-semibold text-gray-300 mb-2">Teléfono de Contacto</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej. +34 600 000 000" required
+                                class="w-full bg-wolves-dark border border-wolves-blue/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-wolves-cyan transition-colors placeholder-gray-600">
+                        </div>
+                        <div>
+                            <label for="categoria" class="block text-sm font-semibold text-gray-300 mb-2">Categoría de Interés</label>
+                            <select id="categoria" name="categoria" required
+                                class="w-full bg-wolves-dark border border-wolves-blue/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-wolves-cyan transition-colors">
+                                <option value="" disabled selected class="text-gray-600">Selecciona una categoría</option>
+                                <option value="infantil" class="bg-wolves-dark">Infantil (Under 13)</option>
+                                <option value="cadete" class="bg-wolves-dark">Cadete (Under 17)</option>
+                                <option value="femenil" class="bg-wolves-dark">Wolves Women (Femenil)</option>
+                                <option value="elite" class="bg-wolves-dark">Senior Masculino (Elite)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="mensaje" class="block text-sm font-semibold text-gray-300 mb-2">Mensaje o Comentarios</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos un poco sobre ti, si tienes experiencia previa en algún deporte, etc." required
+                            class="w-full bg-wolves-dark border border-wolves-blue/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-wolves-cyan transition-colors placeholder-gray-600 resize-none"></textarea>
+                    </div>
+
+                    <!-- Mensaje de confirmación personalizado (sin alertas de navegador) -->
+                    <div id="form-feedback" class="hidden p-4 rounded-xl text-center font-semibold text-sm"></div>
+
+                    <div class="text-center pt-2">
+                        <button type="submit" 
+                            class="w-full sm:w-auto px-10 py-4 rounded-xl bg-wolves-cyan text-wolves-dark font-extrabold text-lg hover:bg-wolves-accent hover:shadow-[0_0_20px_rgba(111,255,233,0.4)] transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 mx-auto">
+                            Enviar Solicitud <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-wolves-dark text-gray-400 py-12 border-t border-wolves-blue/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Col 1: Club Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-wolves-navy rounded-full p-1 border border-wolves-cyan flex items-center justify-center">
+                            <!-- SVG Mini Logo -->
+                            <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20,80 L30,55 L40,58 L50,50 L60,58 L70,55 L80,80 L50,90 Z" fill="#1E3A8A" stroke="#3B82F6" stroke-width="2"/>
+                                <polygon points="35,35 65,35 50,70" fill="#374151"/>
+                                <polygon points="45,55 55,55 50,68" fill="#111827"/>
+                                <polygon points="42,42 48,44 45,46" fill="#6FFFE9"/>
+                                <polygon points="58,42 52,44 55,46" fill="#6FFFE9"/>
+                            </svg>
+                        </div>
+                        <span class="font-extrabold text-lg tracking-wider text-white">BLUE WOLVES</span>
+                    </div>
+                    <p class="text-sm">
+                        La manada deportiva más dominante del fútbol americano. Disciplina, respeto y honor en cada yarda.
+                    </p>
+                </div>
+
+                <!-- Col 2: Accesos Rápidos -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#inicio" class="hover:text-wolves-accent transition-colors">Inicio</a></li>
+                        <li><a href="#nosotros" class="hover:text-wolves-accent transition-colors">Quiénes Somos</a></li>
+                        <li><a href="#club" class="hover:text-wolves-accent transition-colors">El Club</a></li>
+                        <li><a href="#ubicacion" class="hover:text-wolves-accent transition-colors">Ubicación</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Categorías -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Secciones Deportivas</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><span class="hover:text-wolves-accent cursor-pointer transition-colors">Infantil (U13)</span></li>
+                        <li><span class="hover:text-wolves-accent cursor-pointer transition-colors">Cadetes (U17)</span></li>
+                        <li><span class="hover:text-wolves-accent cursor-pointer transition-colors">Flag Femenil</span></li>
+                        <li><span class="hover:text-wolves-accent cursor-pointer transition-colors">Senior Masculino</span></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Redes Sociales -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Síguenos en Redes</h3>
+                    <p class="text-sm mb-4">Mantente al tanto de nuestros partidos, resultados y convocatorias.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-wolves-navy hover:bg-wolves-cyan hover:text-wolves-dark flex items-center justify-center border border-wolves-blue/30 text-white transition-colors" aria-label="Facebook Blue Wolves">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-wolves-navy hover:bg-wolves-cyan hover:text-wolves-dark flex items-center justify-center border border-wolves-blue/30 text-white transition-colors" aria-label="Instagram Blue Wolves">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-wolves-navy hover:bg-wolves-cyan hover:text-wolves-dark flex items-center justify-center border border-wolves-blue/30 text-white transition-colors" aria-label="Twitter Blue Wolves">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-wolves-navy hover:bg-wolves-cyan hover:text-wolves-dark flex items-center justify-center border border-wolves-blue/30 text-white transition-colors" aria-label="Youtube Blue Wolves">
+                            <i data-lucide="youtube" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copy y Legales -->
+            <div class="pt-8 border-t border-wolves-blue/20 text-center text-xs text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>&copy; 2026 Club de Fútbol Americano Blue Wolves. Todos los derechos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Política de Privacidad</a>
+                    <span>&middot;</span>
+                    <a href="#" class="hover:underline">Código de Conducta</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE INTERACCIÓN -->
+    <script>
+        // Inicializar Iconos Lucide
+        lucide.createIcons();
+
+        // Control del menú móvil desplegable
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú móvil al hacer click en un enlace
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Control del Header al hacer scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-1', 'shadow-2xl', 'bg-wolves-dark/95');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.remove('py-1', 'shadow-2xl', 'bg-wolves-dark/95');
+                header.classList.add('py-3');
+            }
+        });
+
+        // Control Interactividad de Formulario de Contacto
+        const contactForm = document.getElementById('contact-form');
+        const feedbackDiv = document.getElementById('form-feedback');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simular envío exitoso
+            feedbackDiv.classList.remove('hidden', 'bg-red-500/10', 'text-red-400', 'border-red-500/30');
+            feedbackDiv.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border', 'border-emerald-500/30');
+            feedbackDiv.innerHTML = `
+                <div class="flex items-center justify-center gap-2">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
+                    <span>¡Solicitud enviada con éxito! Nos comunicaremos contigo en menos de 24 horas.</span>
+                </div>
+            `;
+            lucide.createIcons(); // Volver a renderizar el icono de éxito
+            
+            // Limpiar formulario
+            contactForm.reset();
+            
+            // Ocultar mensaje tras 5 segundos
+            setTimeout(() => {
+                feedbackDiv.classList.add('hidden');
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
+
+```
